@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 use Carbon\Carbon;
-use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {

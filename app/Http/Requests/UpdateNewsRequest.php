@@ -13,7 +13,7 @@ class UpdateNewsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'string|min:5|max:150',
+            'caption' => 'string|min:5|max:150',
+            'body' => 'string',
+            'type_id' => 'exists:App\Models\NewsType,id',
+            'media' => 'nullable|url'
         ];
     }
 }

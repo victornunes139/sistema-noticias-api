@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('news')->group(function () {
         Route::get('me', [NewsController::class, 'index']);
-        Route::get('type/{type_id}', [NewsController::class, 'index']);
+        Route::get('type/{type_id}', [NewsController::class, 'listByType']);
         Route::post('create', [NewsController::class, 'store']);
         Route::post('update/{news_id}', [NewsController::class, 'update']);
         Route::post('delete/{news_id}', [NewsController::class, 'destroy']);

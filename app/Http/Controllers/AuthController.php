@@ -55,7 +55,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => Carbon::now()->addMinutes(auth()->factory()->getTTL())
+            'expires_in'   => Carbon::now()->addMinutes(auth()->factory()->getTTL())->format('Y-m-d H:i:s')
         ]);
     }
 }

@@ -54,7 +54,7 @@ class NewsTypeController extends Controller
         }
 
         $newsType->update($request->all());
-        return response()->json(['message'=> "News successfully updated."], Response::HTTP_OK);
+        return response()->json(['message'=> "News Type successfully updated."], Response::HTTP_OK);
     }
 
     /**

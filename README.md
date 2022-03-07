@@ -1,64 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Logo](https://www.opovo.com.br/reboot/includes/assets/img/opovo%20logo.svg)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Noticias-API
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+API desenvolvido para realizar operações de CRUD de noticias, com base nos seus tipos e com baso no
+jornalista logado
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## Tecnologias Utilizadas
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**Ambiente de Desenvolvimento:** Docker
 
-### Premium Partners
+**Linguagem:** PHP
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+**Framework:** Laravel
 
-## Contributing
+**Banco de dados:** Mysql
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Plataforma para teste da api:** Postman
 
-## Code of Conduct
+**Observação**: \
+Nesse projeto foi utilizado o **Laravel Sail**. \
+O **Laravel Sail** é uma interface de linha de comando leve para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.  
+O `sail` script fornece uma CLI com métodos convenientes para interagir com os contêineres do Docker definidos pelo docker-compose.yml.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## Instalação
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**1º Passo**: Iniciar os containers Docker
+
+Após clonar o projeto, deve-se entrar na pasta raiz do projeto, onde se encontra o arquivo "docker-compose.yml" :
+
+```bash
+cd noticias-api/
+```
+
+Estando na pasta raiz do projeto, deve-se rodar o comando para instalar as dependências:
+
+```bash
+docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -v $(pwd):/var/www/html \
+  -w /var/www/html \
+  laravelsail/php81-composer:latest \
+  composer install --ignore-platform-reqs
+```
+
+**2º Passo:**  Gerar o alias para o comando original do sail
+
+```bash
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+```
+
+**3º Passo:**  Gerar o arquivo .env
+
+```bash
+cp .env.example .env
+```
+
+**4º Passo:** Agora devemos subir os containers e criar os volumes, rodar o comando:
+
+```bash
+sail up -d
+```
+
+**5º Passo:**  Setar APP_KEY no .env
+
+```bash
+sail artisan key:generate
+```
+
+**6º Passo:** Criar as tabelas
+
+```bash
+sail artisan migrate
+```
+
+**7º Passo:** Gerar as seeders
+
+```bash
+sail artisan db:seed
+```
+
+#### PRONTO! A API está funcionando! :grinning:
+
+
+**Obs**: Caso deseje encerrar os containers:
+
+```bash
+./vendor/bin/sail down
+```
+
+## Documentação da API
+
+[Documentação](https://documenter.getpostman.com/view/5876341/UVsEUoc8)
+
